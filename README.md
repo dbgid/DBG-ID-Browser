@@ -129,6 +129,14 @@ app/build/outputs/apk/debug/app-debug.apk
 
 ---
 
+## Download
+
+[Download APK](https://github.com/dbgid/DBG-ID-Browser/releases/download/v.1.1/com.dbgid.browser.apk)
+
+You can also get builds from the GitHub Releases section.
+
+---
+
 ## Start Page Link
 
 GitHub shortcut on the home page:
