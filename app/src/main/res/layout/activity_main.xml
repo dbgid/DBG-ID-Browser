@@ -1,0 +1,483 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWindow">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:id="@+id/topPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_surface"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/brandTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/browser_brand"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="17sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/statusText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/browser_subtitle"
+                        android:textColor="@color/colorMuted"
+                        android:textSize="10sp"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/newTabButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_primary_button"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/action_new_tab"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="11sp"/>
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/tabScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/tabStrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/urlInput"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_address_bar"
+                    android:hint="@string/hint_url"
+                    android:imeOptions="actionGo"
+                    android:inputType="textUri"
+                    android:maxLines="1"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorMuted"
+                    android:textSize="13sp"/>
+
+                <Button
+                    android:id="@+id/clearUrlButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/bg_secondary_button"
+                    android:minWidth="0dp"
+                    android:text="x"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="11sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/pageMetaText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/page_meta_placeholder"
+                android:textColor="@color/colorMuted"
+                android:textSize="10sp"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/bookmarksButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_secondary_button"
+                        android:text="@string/action_bookmarks"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"/>
+
+                    <Button
+                        android:id="@+id/scriptsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/bg_secondary_button"
+                        android:text="@string/action_scripts"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"/>
+
+                    <Button
+                        android:id="@+id/downloadsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/bg_secondary_button"
+                        android:text="@string/action_downloads"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"/>
+
+                    <Button
+                        android:id="@+id/menuButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/bg_secondary_button"
+                        android:text="@string/action_more"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pageProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="2dp"
+            android:max="100"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/webContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_web_surface"/>
+
+        <LinearLayout
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/bg_bottom_nav"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_bottom_nav_button"
+                android:text="@string/action_back"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/forwardButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_bottom_nav_button"
+                android:text="@string/action_forward"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/homeButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.2"
+                android:background="@drawable/bg_bottom_nav_button"
+                android:text="@string/action_home"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"/>
+
+            <Button
+                android:id="@+id/reloadButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.2"
+                android:background="@drawable/bg_bottom_nav_button"
+                android:text="@string/action_reload"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"/>
+
+            <Button
+                android:id="@+id/tabsButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1.1"
+                android:background="@drawable/bg_primary_button"
+                android:minWidth="0dp"
+                android:text="@string/action_tabs"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/runtimeContainer"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pullRefreshIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_terminal_panel"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp">
+
+            <ProgressBar
+                android:id="@+id/pullRefreshSpinner"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:indeterminate="true"/>
+
+            <TextView
+                android:id="@+id/pullRefreshText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Pull to refresh"
+                android:textColor="#8EF7C4"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/turnstileKeyPanel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_terminal_panel"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/turnstileKeyTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SITE KEY"
+                android:textAllCaps="true"
+                android:textColor="#8EF7C4"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/turnstileKeyCopyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Copy"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+
+            <Button
+                android:id="@+id/turnstileKeyMinimizeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="_"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+
+            <Button
+                android:id="@+id/turnstileKeyMaximizeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="+"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/turnstileKeyBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:maxLines="3"
+            android:textColor="#D7FFE9"
+            android:textSize="11sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/turnstileSolvePanel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_terminal_panel"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/turnstileSolveTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TURNSTILE"
+                android:textAllCaps="true"
+                android:textColor="#8EF7C4"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/turnstileSolveCopyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Copy"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+
+            <Button
+                android:id="@+id/turnstileSolveMinimizeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="_"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+
+            <Button
+                android:id="@+id/turnstileSolveMaximizeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/bg_terminal_button"
+                android:minWidth="0dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="+"
+                android:textAllCaps="false"
+                android:textColor="#B8FFD9"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/turnstileSolveBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:maxLines="3"
+            android:textColor="#D7FFE9"
+            android:textSize="11sp"/>
+    </LinearLayout>
+</FrameLayout>

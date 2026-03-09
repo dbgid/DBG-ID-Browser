@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DBG ID Browser</string>
+    <string name="browser_brand">DBG ID BROWSER</string>
+    <string name="browser_subtitle"></string>
+    <string name="action_new_tab">+ Tab</string>
+    <string name="action_back">&#x2039;</string>
+    <string name="action_forward">&#x203A;</string>
+    <string name="action_home">Home</string>
+    <string name="action_reload">Reload</string>
+    <string name="action_tabs">Tabs</string>
+    <string name="action_bookmarks">Bookmarks</string>
+    <string name="action_scripts">Scripts</string>
+    <string name="action_downloads">Downloads</string>
+    <string name="action_more">More</string>
+    <string name="hint_url">Search or enter address</string>
+    <string name="page_meta_placeholder">Ready.</string>
+</resources>
