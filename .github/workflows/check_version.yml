@@ -1,0 +1,86 @@
+name: Check Version Tag
+
+on:
+  push:
+    tags:
+      - '*'
+  release:
+    types:
+      - created
+      - edited
+      - published
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: Tag name to validate manually
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve tag name
+        id: tag
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            tag_name="${{ github.event.release.tag_name }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ inputs.tag_name }}" ]]; then
+            tag_name="${{ inputs.tag_name }}"
+          else
+            tag_name="${GITHUB_REF_NAME}"
+          fi
+
+          if [[ -z "${tag_name}" ]]; then
+            echo "Unable to determine tag name for this run." >&2
+            exit 1
+          fi
+
+          echo "tag_name=${tag_name}" >> "${GITHUB_OUTPUT}"
+
+      - name: Compare tag with app version
+        shell: bash
+        env:
+          TAG_NAME: ${{ steps.tag.outputs.tag_name }}
+        run: |
+          version_name="$(sed -n "s/.*versionName '\([^']\+\)'.*/\1/p" app/build.gradle | head -n 1)"
+
+          if [[ -z "${version_name}" ]]; then
+            echo "versionName was not found in app/build.gradle." >&2
+            exit 1
+          fi
+
+          expected_tags=(
+            "${version_name}"
+            "v${version_name}"
+            "v.${version_name}"
+          )
+
+          matched=false
+          for expected_tag in "${expected_tags[@]}"; do
+            if [[ "${TAG_NAME}" == "${expected_tag}" ]]; then
+              matched=true
+              break
+            fi
+          done
+
+          {
+            echo "## Version Tag Check"
+            echo ""
+            echo "- app versionName: \`${version_name}\`"
+            echo "- provided tag: \`${TAG_NAME}\`"
+            echo "- accepted tags: \`${expected_tags[0]}\`, \`${expected_tags[1]}\`, \`${expected_tags[2]}\`"
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+          if [[ "${matched}" != "true" ]]; then
+            echo "Tag ${TAG_NAME} does not match app version ${version_name}." >&2
+            exit 1
+          fi
